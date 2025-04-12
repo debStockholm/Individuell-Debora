@@ -15,7 +15,7 @@ _**Reading the data according to real life of Indian Students:**_
 The Dataset is based on a survey among indian students of different grades to see if they experiment Depression 
 or negative thinking.\n
 The dataset contains a few parameters which can be compared such as _Sleep hours, diagnosed depression, school satisfaction, 
-level of education atteinted, Dietary_ and more.
+level of education they are pursuing, Dietary_ and more.
 
 
 In India students undergo compulsory education from 6 to 14 years old (Primary stage). 
