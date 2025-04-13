@@ -14,7 +14,7 @@ let depression_percent = await dbQuery(`
   ROUND(COUNT(CASE WHEN Depression = 1 THEN 1 END) * 100.0 / COUNT(*)) AS percent_with_Dep
 FROM 
     Study_India
-WHERE Age <= 34 AND Degree != 'Others'
+WHERE Age <= 34 AND Degree != 'Others' and Profession = 'Student'
 group by Degree
 order by Degree asc`)
 
@@ -50,7 +50,7 @@ let students_avg_without_Depression = await dbQuery(`
   round(avg(FinancialStress), 1) as Financial_stress,
   round(avg(WorkStudyhours), 1) as Hours_study_daily
 from Study_India
-where Depression = 0 and Degree != 'Others'
+where Depression = 0 and Degree != 'Others' and Profession = 'Student'
   group by Degree
     order by Total_students desc
   `)
@@ -78,7 +78,7 @@ let students_avg_with_Depression = await dbQuery(`
   round(avg(FinancialStress), 1) as Financial_stress,
   round(avg(WorkStudyhours), 1) as Hours_study_daily
 from Study_India
-where Depression = 1 and Degree != 'Others'
+where Depression = 1 and Degree != 'Others'and Profession = 'Student'
   group by Degree
     order by Total_students desc
   `)
@@ -104,7 +104,7 @@ let Age_degree_TOTAL = await dbQuery(`
   round(avg(FinancialStress), 1) as Financial_stress,
   round(avg(WorkStudyhours), 1) as Hours_study_daily
 from Study_India
-where Age <= 34 and Degree != 'Others'
+where Age <= 34 and Degree != 'Others' and Profession = 'Student'
   group by Age
     order by Age asc
   `)
@@ -129,7 +129,7 @@ let Age_withDepression = await dbQuery(`
   round(avg(FinancialStress), 1) as Financial_stress,
   round(avg(WorkStudyhours), 1) as Hours_study_daily
 from Study_India
-where Age <= 34 and Degree != 'Others' and Depression = 1
+where Age <= 34 and Degree != 'Others' and Profession = 'Student' and Depression = 1 
   group by Age
     order by Age asc
   `)
@@ -157,7 +157,7 @@ let Age_withoutDepression = await dbQuery(`
   round(avg(FinancialStress), 1) as Financial_stress,
   round(avg(WorkStudyhours), 1) as Hours_study_daily
 from Study_India
-where Age <= 34 and Degree != 'Others' and Depression = 0
+where Age <= 34 and Degree != 'Others' and Profession = 'Student' and Depression = 0
   group by Age
     order by Age asc
   `)
@@ -166,3 +166,73 @@ tableFromData({
   data: Age_withoutDepression,
   columnNames: ['Age', 'Total_students', 'CGPA', 'Sleep', 'Academic_Pressure', 'Study_Satisfaction', 'Financial_stress', 'Avg_study_hours']
 })
+
+addMdToPage(`
+  ___________________________________
+## City AND _without_ Depression
+Average statistic for students sorted by City and without diagnosed Depression:
+  `)
+let City_NODepress = await dbQuery(`
+  select * from (select
+  City,
+  count(*) Total_students,
+  round(avg(CGPA), 2) as Academy_performance,
+  round(avg(SleepDuration), 1) as Avg_sleep,
+  round(avg(AcademiPressure), 1) as Avg_AcademicPressure,
+  round(avg(StudySatisfaction), 1) as Study_satisfaction,
+  round(avg(FinancialStress), 1) as Financial_stress,
+  round(avg(WorkStudyhours), 1) as Hours_study_daily
+from Study_India
+where Age <= 34 and Degree != 'Others' and Depression = 0 
+  group by City) as city_grouped
+  where Total_students >=50
+  order by Total_students desc
+  limit 5
+  `)
+
+
+tableFromData({
+  data: City_NODepress,
+  columnNames: ['City', 'Total_students', 'CGPA', 'Sleep', 'Academic_Pressure', 'Study_Satisfaction', 'Financial_stress', 'Avg_study_hours']
+})
+
+
+
+addMdToPage(`
+  ___________________________________
+## City AND _with_ Depression
+Average statistic for students sorted by City and with diagnosed Depression:
+  `)
+let City_withDepress = await dbQuery(`
+  select * from 
+  (select 
+  City,
+  count(*) Total_students,
+  round(avg(CGPA), 2) as Academy_performance,
+  round(avg(SleepDuration), 1) as Avg_sleep,
+  round(avg(AcademiPressure), 1) as Avg_AcademicPressure,
+  round(avg(StudySatisfaction), 1) as Study_satisfaction,
+  round(avg(FinancialStress), 1) as Financial_stress,
+  round(avg(WorkStudyhours), 1) as Hours_study_daily
+from Study_India
+where Age <= 34 and Degree != 'Others' and Depression = 1 
+  group by City ) as city_grouped
+  where Total_students >= 50
+  order by Total_students desc
+  limit 5
+  `)
+
+
+tableFromData({
+  data: City_withDepress,
+  columnNames: ['City', 'Total_students', 'CGPA', 'Sleep', 'Academic_Pressure', 'Study_Satisfaction', 'Financial_stress', 'Avg_study_hours']
+})
+
+addMdToPage(`
+  ___________________________________
+## Considerations:
+* it can be seen that people without depression have apprently less financialstress, feel less academin pressure and are more satified than the cunter part about their studies,
+
+overall classification which is not dipendent by the City they live in, the degree they are pursuing or their Age.
+I think depression is correlated to  the study satisfaciton, meanshile financial stress and academic pressure may contribute to students depression 
+  `)
