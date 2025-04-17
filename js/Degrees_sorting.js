@@ -60,6 +60,7 @@ tableFromData({
   columnNames: ['Degree', 'Total_students', 'avg_Age', 'CGPA', 'Sleep', 'Academic_Pressure', 'Study_Satisfaction', 'Financial_stress', 'Avg_study_hours']
 })
 
+console.log(students_avg_without_Depression)
 
 
 addMdToPage(`
@@ -231,7 +232,7 @@ tableFromData({
 addMdToPage(`
   ___________________________________
 ## Considerations:
-* it can be seen that people without depression have apprently less financialstress, feel less academin pressure and are more satified than the cunter part about their studies,
+* it can be seen that people without depression have apprently less financial stress, feel less academin pressure and are more satified than the cunter part about their studies,
 
 overall classification which is not dipendent by the City they live in, the degree they are pursuing or their Age.
 I think depression is correlated to  the study satisfaciton, meanshile financial stress and academic pressure may contribute to students depression 

@@ -1,8 +1,8 @@
 createMenu('Statistics Template JS', [
   { name: 'Documentation to understand Data', script: 'Documentation.js' },
-  { name: 'Documentation visualized', script: 'DocumentsTable.js' },
-  { name: 'Start', script: 'Webbsida.js' },
-  { name: 'Class 12 analysis', script: 'class12.js' },
-  { name: 'Working here', script: 'Calc.js' },
-  { name: 'Hitta trender', script: 'trends.js' }
+  { name: 'About Depression', script: 'om_depression.js' },
+  { name: 'Depression and enviromental factors', script: 'Degrees_sorting.js' },
+  { name: 'Depression inheritance', script: 'depression_inherited.js' },
+  { name: 'graf', script: 'grafer.js' },
+  { name: 'Tester', script: 'tester.js' }
 ]);
