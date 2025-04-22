@@ -34,7 +34,8 @@ Other represented groups in the dataset are (students who are pursuing):
 * Others (not specified)
 
 Here can we found other information about enrollement among students: https://www.dataforindia.com/enrolment-in-education/\n
-And education in India: https://en.wikipedia.org/wiki/Education_in_India
+And education in India: https://en.wikipedia.org/wiki/Education_in_India;\n
+Dataset from Kaggle: https://www.kaggle.com/datasets/adilshamim8/student-depression-dataset
 
 _______________________________________________
 
@@ -60,7 +61,7 @@ I aggregated the different degrees in bigger aggregations to make computations e
 In the dataset 'Study_Indien', the different degrees are associated like this:
    * 'ME', 'MHM', 'LLM', 'MA', 'MBA', 'MD', 'M.Pharm', 'MBBS', 'M.Com', 'M.Ed', 'M.Tech', 'MCA', 'MSc' = 'Master'\n
    * 'B.Ed', 'B.Com', 'B.Arch', 'BCA', 'B.Tech', 'BHM', 'BSc', 'B.Pharm', 'BBA','BE','LLB', 'BA' = 'Bachelor'\n
-I do have a spare database 'Depression_study_fix' where this aggregation is NOT done, just in case. 
+I do have a spare database where this aggregation is NOT done, just in case. 
 ___________________________________
 
 * **Outliers and other small deviations** (according to me)
@@ -69,13 +70,11 @@ In the dataset is present a handful of Data which is deemed not necessary for th
 The total dataset includes **27901** rows.\n
 **_Outliers which are removed in ALL cases_**:
 There are _only_ 49 students are older than 34y.o., which in a 27k rows dataset can be considered 
-out of the normal.
-There are also 31 people which do not have 'Student' as Profession. Since we are analyzing students,
-I removed them as well.
-
-**_Outliers which are removed in SOME cases_**:
-Parameter _Degree_: there are a few values in the column _Degree_ = 'Others'. The rows containing those values
-are removed when making some of the statistics
+out of the normal.\n
+There are also 31 people which do not have 'Student' as _Profession_. Since we are analyzing students,
+I removed them as well.\n 
+_Degree_: there are 35 rows values in the column _Degree_ = 'Others'. The rows containing those values
+are removed when making some of the statistics.
 _____________________________
 
 
