@@ -1,65 +1,6 @@
-/*let depression_percent = await dbQuery(` select Degree,
-  COUNT(CASE WHEN Depression = 0 THEN 1 END) AS count_noDep,
-  ROUND(COUNT(CASE WHEN Depression = 0 THEN 1 END) * 100.0 / COUNT(*)) AS p_noDep,
-  COUNT(CASE WHEN Depression = 1 THEN 1 END) AS count_withDep,
-  ROUND(COUNT(CASE WHEN Depression = 1 THEN 1 END) * 100.0 / COUNT(*)) AS p_withDep
-FROM 
-    Study_India
-WHERE 
-    Age <= 34 AND Degree != 'Others' and Profession='Student'
-GROUP BY 
-    Degree
-  `)
-
-tableFromData({
-  data: depression_percent,
-  columnNames: []
-})
-
-
-addMdToPage(` 
-  _____________________________________
-**Results**: \n
-According to filters, there are many similarities among students attending the same Degree \n
-_SleepDuration_: according to classification (look:Documentation) an average SleepDuration of 1.4 (with depression) , 1.5 (no depression) means that students 
-have average sleeping hours laying beetween 5-6 hours sleep and 7-8 hour sleep. 
-So around 6.5hours sleep per night.\n
-The ideal sleep time for an adult is between 7-9 hours, which means our Class12 students 'lacks' some extra hour of sleep.\n
-Going deeper on analysis, we can see that, while the sleeptime of students withOUT Depression is almost equally shared in all the 'sleep duration slots',
-for the students with Depression we can see that 32% of them have a sleep schedule of less than 5 hours per night(1378/4303, 32%), which is adjusted by the 26% which sleeps 7-8 hours per night.\n
-They also show same values in CGPA performance indicator.\n
-Differences we can consider:
-* _Average Age_: the Average age of the students without depression in a unit greater (almost a year older) than the the ones with depression; are older students more 'chill'?;
-* _AcademicPressure_: there is significant difference in those values. Students _without depression_ feel _**significantly lower**_ academic pressure than the counterpart;
-* _StudySatisfaction_: students _without Depression_ looks a _**bit more**_ satified than the counterpart about the overall studies;
-* _FinancialStress_: students _with Depression_ shows a _**significantly higher**_ financial stress factor than the counterpart;
-* _Average_Study_hours_:  students _with Depression_ dedicate _**more than**_ 1.5 hours to studying, compared to the countepart.
-` )
-
 
 addMdToPage(`
-  **Results**: \n
-According to filters, there are many similarities among students attending the same Degree: \n
-_SleepDuration_: according to classification (look at Documentation) an average SleepDuration of 1.3(with depression) , 1.5 (no depression) means that students
-have average sleephours which lays beetween 5-6 hours sleep and 7-8 hour sleep.
-So around 6.5hours sleep per night.\n
-The ideal sleep time for an adult is between 7-9 hours, which means our Bachelors students also 'lacks' some extra hour of sleep.\n
-Going deeper on analysis, we can see that, while the sleeptime of students withOUT Depression is almost equally shared in all the 'sleep durations slots',
-for the students with Depression we can see that 33% of them have a sleep schedule of less than 5 hours per night(2409/7094, 33%), which is adjusted by the 26% which sleeps 7-8 hours per night.\n
-_Interesting, is almost alike the % we had for Class 12 students!_\n
-
-They also show same values in CGPA performance indicator.\n
-Differences we can consider:
-* _Average Age_: the Average age of the students without depression in a unit greater (1.5 years older) than the the ones with depression; are older students more 'chill'?;
-* _AcademicPressure_: there is significant difference in those values. Students _without depression_ feels _**significantly lower**_ academic pressure than the counterpart;
-* _StudySatisfaction_: students _without Depression_ looks _**a bit less**_ satified than the counterpart about the overall studies;
-* _FinancialStress_: students _with Depression_ shows a _**significantly higher**_ financial stress factor than the counterpart;
-Average_Study_hours_:  students _with Depression_ dedicate _**more than**_ 1.5 hours to studying, compared to the countepart.
-
-` )*/
-
-addMdToPage(`
-  ## Behavioural factors and depression: sleep and dietary related information
+  ## Behavioural/genetic factors and depression: 'heredity', sleep and dietary related information
 
 Is there a pattern between having depression and behavioral patterns such ad sleep and dietary habits?\n
 Let's make a graph comparing averages of answers among the students with declared depression and the ones without declared depression.
@@ -140,8 +81,64 @@ let Dietary_habits_no_depression =
     }
   });
 
+addMdToPage(`
+_What do the graphs tell us:_
+Looks like the students which are affected by depression tend to have worse dietary habits than the counterpart; it's also a kind of a chicken-and-egg situation: your diet can contribute to worsen your health, but depression can influence your eating habits.
+Read more on 'about Depression'.
+  `)
 
-//__________Depression and genetics
+// depression and sleep.
+
+addMdToPage(`
+## Is there a correlation between sleeping habits and depression?
+
+_**Dataset columns explained**_:
+
+*  **SleepDuration** values, associated:
+    * 0 = less than 5 hours sleep
+    * 1 = 5-6 hours sleep
+    * 2 = 7-8 hours sleep
+    * 3 = more then 8 hours sleep
+    * 4 = others, not specified 
+  `)
+
+let sleeping_habit_tab = await dbQuery(`select Degree, 
+round(avg(case when Depression = 1 then SleepDuration end), 1) as avg_with_depression,
+round(avg(case when Depression = 0 then SleepDuration end), 1) as avg_no_depression
+from Study_India
+where Age <= 34  and Degree != 'Others' AND Profession = 'Student' 
+group by Degree
+  `)
+
+tableFromData({
+  data: sleeping_habit_tab,
+  columnNames: ['Degree', 'Sleep avg with depression', 'Sleep avg without depression']
+})
+
+addMdToPage(`without groping looks like:`)
+
+let sleeping_habit_tab_nogroup = await dbQuery(`select 
+round(avg(case when Depression = 1 then SleepDuration end), 1) as avg_with_depression,
+round(avg(case when Depression = 0 then SleepDuration end), 1) as avg_no_depression
+from Study_India
+where Age <= 34  and Degree != 'Others' AND Profession = 'Student' 
+  `)
+
+tableFromData({
+  data: sleeping_habit_tab_nogroup,
+  columnNames: ['Sleep avg with depression', 'Sleep avg without depression']
+})
+
+addMdToPage(`
+_What does the tables tell us:_\n
+The average Sleeping duration of studets with Depression is 1.3 , meaning most of the students has between 5-6 hours sleep and 
+7-8 hours sleep per night. Same for the ones without depression, which got on average of 1.5. The values with 0 are taken into account when calculating the mean.
+Sleep duration can be an important factor correlated with depression; it can contribute to the illness, but can also be caused by it.`)
+
+
+
+
+
 addMdToPage(`
 ## Is there a correlation between Mental health issues running through the family and the outcome in our students?
   `)
@@ -163,9 +160,9 @@ WHERE
 Age <= 34 AND Degree != 'Others' AND Profession = 'Student'
 `)
 
+
+
 //Data below comes from query!
-
-
 
 let data_MhH_and_Depression =
   [
@@ -190,6 +187,7 @@ drawGoogleChart({
 })
 
 addMdToPage(`
+_What does the  graphs tell us:_\n
 According to our dataset it's hard to affirm a correlation/causality between 
 having a Mental health issues history running in the family and the current depression study.\n
 It's true that the % of students with depression in higher among students with recorded Mental Health

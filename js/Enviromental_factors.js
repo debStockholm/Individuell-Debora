@@ -302,8 +302,12 @@ if (second_dropdown === 'Age and with depression') { avg_age_academic_2() };
 if (second_dropdown === 'City and no depression') { avg_city_academic() };
 if (second_dropdown === 'City and with depression') { avg_city_academic_2() };
 
+addMdToPage(`
+What does the graphs tell us:\n
 
-
+Age and City doesn't seem to influence the CGPA, the hours you study, the academic stress perceived and your study satisfaction.
+Trendlines are quite linear so there's no real correlation between the axis.
+`)
 
 //_____________________________________WORK SO FAR__________________
 
