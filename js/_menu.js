@@ -7,5 +7,6 @@ createMenu('Statistics Template JS', [
       { name: 'Enviromental factors', script: 'Enviromental_factors.js' },
       { name: 'Biological and genetic factors', script: 'Genetic_behavioural_factors.js' }]
   },
-  { name: 'Tester', script: 'tester.js' }
+  { name: 'Tester', script: 'tester.js' },
+  { name: 'Conclusion', script: 'avslut.js' }
 ]);
