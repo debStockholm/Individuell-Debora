@@ -30,7 +30,7 @@ drawGoogleChart({
     title: 'School related statistics of students WITHOUT DEPRESSION',
     legend: { position: 'top', textStyle: { color: 'black', fontSize: 14 } },
     colors: ['#43a047', '#26a69a', '#00acc1', '#29b6f6'],
-    vAxis: { title: 'Average*' },
+    vAxis: { title: 'Average' },
     hAxis: { title: 'Degree' },
     seriesType: 'bars',
     slantedText: true,
@@ -61,7 +61,7 @@ drawGoogleChart({
     legend: { position: 'top', textStyle: { color: 'black', fontSize: 14 } },
     colors: ['#f06292', '#f48fb1', '#ffeb3b', '#ffa726'],
     vAxis: {
-      title: 'Average*'
+      title: 'Average'
     },
     hAxis: { title: 'Degree' },
     seriesType: 'bars',
@@ -119,7 +119,7 @@ let avg_age_academic = function () {
         slantedTextAngle: 45
       },
       chartArea: {
-        left: '5%', top: '10%', right: '5%', bottom: '15%'
+        left: '10%', top: '15%', right: '10%', bottom: '20%'
       },
       tooltip: { trigger: 'focus' },
       trendlines: {
@@ -183,7 +183,7 @@ let avg_age_academic_2 = function () {
         slantedTextAngle: 45
       },
       chartArea: {
-        left: '5%', top: '10%', right: '5%', bottom: '15%'
+        left: '10%', top: '15%', right: '10%', bottom: '20%'
       },
       tooltip: { trigger: 'focus' },
       trendlines: {
@@ -222,9 +222,7 @@ let students_avg_city = await dbQuery(`
 from Study_India
 where Depression = 0 and Degree != 'Others' and Profession = 'Student' and Age <= 34
   group by City
-  having count(*) > 50
-  order by City asc
-  limit 10`)
+  having count(*) > 50`)
 
 let avg_city_academic = function () {
   drawGoogleChart({
@@ -232,7 +230,7 @@ let avg_city_academic = function () {
     data: makeChartFriendly(students_avg_city),
     options: {
       height: 500,
-      width: 1200,
+      width: 1350,
       title: 'Academic performace and City',
       legend: { position: 'top', textStyle: { color: 'black', fontSize: 14 } },
       colors: ['#f2a800', '#ff5733', '#d85b00', '#ff8e00'],
@@ -246,7 +244,7 @@ let avg_city_academic = function () {
         slantedTextAngle: 45
       },
       chartArea: {
-        left: '5%', top: '10%', right: '5%', bottom: '15%'
+        left: '5%', top: '15%', right: '5%', bottom: '20%'
       },
       tooltip: { trigger: 'focus' },
     },
@@ -263,9 +261,7 @@ let students_avg_city_2 = await dbQuery(`
 from Study_India
 where Depression = 1 and Degree != 'Others' and Profession = 'Student' and Age <= 34
   group by City
-  having count(*) > 50
-  order by City asc
-  limit 10`)
+  having count(*) > 50`)
 
 let avg_city_academic_2 = function () {
   drawGoogleChart({
@@ -273,7 +269,7 @@ let avg_city_academic_2 = function () {
     data: makeChartFriendly(students_avg_city_2),
     options: {
       height: 500,
-      width: 1200,
+      width: 1350,
       title: 'Academic performace and City',
       legend: { position: 'top', textStyle: { color: 'black', fontSize: 14 } },
       colors: ['#6a5d3f', '#c7b99e', '#8e8b66', '#b49b74'],
@@ -287,7 +283,7 @@ let avg_city_academic_2 = function () {
         slantedTextAngle: 45
       },
       chartArea: {
-        left: '5%', top: '10%', right: '5%', bottom: '15%'
+        left: '5%', top: '15%', right: '5%', bottom: '20%'
       },
       tooltip: { trigger: 'focus' },
     },
@@ -409,6 +405,9 @@ let cities_d = function () {
         title: 'Cities',
         slantedText: true,
         slantedTextAngle: 45
+      },
+      chartArea: {
+        left: '10%', top: '15%', right: '10%', bottom: '20%'
       },
       seriesType: 'bars'
     },

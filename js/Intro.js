@@ -40,7 +40,7 @@ I thought sorting by Degree made
 sense because they should imply also a similar Age among the sample -  the range is wider than expected though.
 For this reason, I tried to see if there was another pattern to follow: is there a correlation which the age and depression? Does the place you live in influence students wellbeing?
 
-I made different graphs for each sorting, in order to find the most relevant pattern... not sure if it makes sense.\n
+I made different graphs for each sorting, in order to find the most relevant pattern... not sure if it makes sense. At the end of the analysis, probably Age would have been the most interesting factor to group things, but I liked the Degree parameters as well, so I left it somewhere\n
 
 **_Let's also see how the statistics look like when data is sorted by the Age of the respondents or by the city they live in:_**\n
 
@@ -66,7 +66,7 @@ let age_sorted = function () {
       legend: { position: 'top', textStyle: { color: 'black', fontSize: 14 } },
       colors: ['#ffcc99', '#1f78b4'],
       vAxis: {
-        title: 'Average %',
+        title: 'Average',
         format: '#\'%\''
       },
       hAxis: {
@@ -146,9 +146,16 @@ let city_sorted = function () {
           opacity: 0.7,
           showR2: true
         }
+      }, chartArea: {
+        left: '10%',
+        top: '15%',
+        right: '5%',
+        bottom: '25%'
       }
     },
-    chartArea: { left: '10%' }
+    chartArea: {
+      left: '10%'
+    }
   });
 }
 
@@ -169,28 +176,25 @@ Read more in _'about Depression'_.\n
 _**Is there a correlation between the city where the respondents live and depression?**_\n
 Good question. There are so many factors which should be considered to underatand why some of the city have bigger gap between the respondents with and without depression: size of the city, poverty, climate and such.
 I, honestly, prompted AI to make some logical consideration according to climate, urban areas and such, and got this back:\n
-"1. _**Urban vs. Smaller Cities**_:
+
+"1._**Urban vs. Smaller Cities**_:\n
 Urban stress in large cities like Hyderabad, Ahmedabad, and Patna may be contributing to the higher depression rates. In bigger cities, people often face higher levels of stress related to work, commute, housing costs, and social isolation despite the high population.
-
 These cities also tend to have better mental health awareness and infrastructure, which could mean depression rates are more accurately reported or more likely to be treated, leading to higher recognition of depression.
-
 Smaller cities like Rajkot, Bhopal, and Vadodara may have less access to mental health care and stigma around mental health, making depression rates seem lower, but this could be due to underreporting or lack of care.
 
-2. _**Poverty & Economic Disparities**_
+2. _**Poverty & Economic Disparities**_\n
 Cities with higher poverty (e.g., Patna, Bhopal) may have more vulnerable populations that are more susceptible to depression. Economic challenges, unemployment, lack of social mobility, and insecurity often correlate with higher depression rates.
-
 Higher income cities like Hyderabad and Ahmedabad still have significant depression rates, but it could be due to the pressures of city life, income inequality, and social isolation.\n
-3. _**Healthcare Access**_:
+
+3. _**Healthcare Access**_:\n
 Better access to mental health care in cities like Hyderabad and Ahmedabad could result in more people seeking help and thus a higher number of diagnosed depression cases. In smaller cities, access may be limited, leading to underreporting or fewer individuals receiving a diagnosis.
 
-4. _**Social and Cultural Factors**_:
+4. _**Social and Cultural Factors**_:\n
 In large cities, there’s often a greater sense of anonymity and social disconnection, which can increase the likelihood of mental health struggles.
-
 Smaller cities may have stronger community networks and family ties, which could help reduce the feeling of isolation and, in turn, reduce the prevalence of depression.
 
-5. _**Climate & Environmental Factors**_:
+5. _**Climate & Environmental Factors**_:\n
 Cities like Hyderabad and Ahmedabad have hotter climates, which may also contribute to mental health challenges (e.g., heat stress, sleep disturbances, and reduced outdoor activities).
-
 Air pollution (which is often higher in big cities) could also play a role in increasing depression. Studies show that higher levels of pollution correlate with increased mental health issues in urban areas."
 \n
 \n
@@ -222,7 +226,7 @@ addMdToPage(`
   Another important consideration: Class 12 degree. In India, Class 12 can be compared to the last year of gymnasiet in Sweden.\n
   Students attending Class12 should be 17-18 y.o. . In our dataset, there are **6080** students attending ('pursuing') Class 12, of which **4503** are older than 18 y.o. (which should the age of 'studenten').\n
   According to Kaggle, the Degrees mentioned are the ones students are pursuing. I do actually think there may been a mistake considering the ages and stress, which means the Degree names would be the titles already atteinted.
-  But I worked accordindly to Kaggles information.
+  But I worked accordingly to Kaggles information.
 
   `)
 

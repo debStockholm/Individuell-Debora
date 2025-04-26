@@ -1,11 +1,10 @@
-import addMdToPage from './libs/addMdToPage.js'
-
 
 
 addMdToPage(`
 
 # Relevant details to understand the Data analysis
 
+(Why analysis is in 'english': I do not have swedish letters on my laptop so tried to make things easier. My english is not the best, but hope it's understandable. Apologize for typos too)
 
 _**Reading the data according to real life of Indian Students:**_
 
@@ -74,7 +73,10 @@ out of the normal.\n
 There are also 31 people which do not have 'Student' as _Profession_. Since we are analyzing students,
 I removed them as well.\n 
 _Degree_: there are 35 rows values in the column _Degree_ = 'Others'. The rows containing those values
-are removed when making some of the statistics.
+are removed when making some of the statistics.\n
+**_Outliers which are removed in some cases_**:
+* _DietaryHabits_ where _Dietary_ = 'Others'. Not considered when querying Dietary related parameters.
+
 _____________________________
 
 
