@@ -10,16 +10,16 @@ addMdToPage(`
 
 _What can we conclude out of this analysis?_
 
-  * **Dietary habits**: students with depression seem to have overal worse dietary habits than the ones without depression;
+  * **Dietary habits**: students with depression seem to have overall worse dietary habits than the ones without depression;
     diet also tends to get 'healthier' the older you get;\n
   * **City**: not really a data I should have taken into account. Cities should have been sorted according to other parameters (climate, poverty rates, size and such), which I didn't, so it didn't really make sense;\n
   * **Financial stress**: (felt) higher in students with depression; it tends to get better the older you get. There wasn't a clear parameter to determine which students had a job or why they felt economy wasn't a issue anymore;\n
   * **Academic Pressure**: (felt) higher in students with depression; it tends to feel better the older you get; \n
   * **Study hours**: students with depression reports studying more than the counterpart, on average;\n
   * **CGPA**: quite alike;\n
-  * **Sleep Duration**: both students with Depression and the ones without Depression have similare avergae sleeping hours; the firdt group most towards the 
-      lowest range (5-6 hours - not optimal), the second group most towars the higher range (7-8 hours, optimal);\n
-  * **Age**: youngest students are more likely to experiment depression (also worldwide). It gets better with growing older;
+  * **Sleep Duration**: both students with Depression and the ones without Depression have similar average sleeping hours; the first group most towards the 
+      lowest range (5-6 hours - not optimal), the second group most towards the higher range (7-8 hours, optimal);\n
+  * **Age**: youngest students are more likely to experiment depression (also worldwide). It gets better growing older;
   * **Mental health history of your family**: still do not know how to interpret this data. If you have depression running in your family you're more likely to develop it,
    but!, the % of people having depression _without_ recorded depression in the family is similar to the % of people having depression _with_ recorded depression in the family. 
    We'd probably should consider other parameters which are not in the dataset.

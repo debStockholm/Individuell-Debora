@@ -18,7 +18,7 @@ let dep_and_dietaryhabits = await dbQuery(`select count(*) as Total_with_Depress
             (SELECT COUNT(*) FROM Study_India WHERE Depression = 1)) AS UnHealthy
 from Study_India
 where
-Age <= 34 and Degree != 'Others' AND Profession = 'Student' and Depression = 1
+Age <= 34 and Degree != 'Others' AND Profession = 'Student' and Depression = 1 and DietaryHabits != 'Others'
   `)
 
 let data_dietary_Depression = [
@@ -57,7 +57,7 @@ let dep_and_dietaryhabits_2 = await dbQuery(`select
 FROM
 Study_India
 WHERE
-Age <= 34 and Degree != 'Others' AND Profession = 'Student' and Depression = 0
+Age <= 34 and Degree != 'Others' AND Profession = 'Student' and Depression = 0 and DietaryHabits != 'Others'
 `)
 
 let data_dietary_No_Depression = [
@@ -85,9 +85,76 @@ addMdToPage(`
 _What do the graphs tell us:_
 Looks like the students which are affected by depression tend to have worse dietary habits than the counterpart; it's also a kind of a chicken-and-egg situation: your diet can contribute to worsen your health, but depression can influence your eating habits.
 Read more on 'about Depression'.
+
+**Extra: how do students eat through the Ages?**
+
+We have observed that younger students tend to experiment depression more.\n
+In the first pie graph we see that almost half of the students having depression eats unhealthy, and only around 20% eats healthy.\n
+In the second pie graph, we see that only about 25% of the students eats unhealthy, and more than 35% eats healthy. \n
+So I was curious to see if the Age was a factor to determine experiencing depression linked to dietary habits. \n
+Meaning: _Are the youngest students, which experience depression the most, the ones that eat mostly unhealthy?_\n
+Here the graph: 
   `)
 
-// depression and sleep.
+let data_dietary_table = await dbQuery(`select Age,
+  round(100.0 * sum(case when DietaryHabits = 'Healthy' then 1 else 0 end)/count(*), 1) as eatHealthy,
+  round(100.0 * sum(case when DietaryHabits = 'Moderate' then 1 else 0 end)/count(*), 1) as eatModerate,
+  round(100.0 * sum(case when DietaryHabits = 'Unhealthy' then 1 else 0 end)/count(*), 1) as eatUnhealthy
+  from Study_India 
+where Age <= 34  and Degree != 'Others' AND Profession = 'Student' and DietaryHabits != 'Others'
+group by Age
+order by eatUnhealthy desc`)
+
+/*tableFromData({
+  data: data_dietary_table,
+  columnNames: ['Age', '% eat healthy', '% eat moderate', '% eat unhealthy']
+})
+*/
+
+drawGoogleChart({
+  type: 'ColumnChart',
+  data: makeChartFriendly(data_dietary_table),
+  options: {
+    height: 500,
+    width: 1200,
+    title: 'Dietary and Age',
+    legend: { position: 'top', textStyle: { color: 'black', fontSize: 14 } },
+    colors: ['#66c2a5', '#fc8d62', '#8da0cb'],
+    vAxis: {
+      title: 'Average',
+      format: '#\'%\'',
+      minValue: 0
+    },
+    hAxis: {
+      title: 'Ages',
+      ticks: [18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34],
+      seriesType: 'bars',
+      slantedText: true,
+      slantedTextAngle: 45
+    },
+    trendlines: {
+      0: { color: '#1b7e2b' },
+      1: { color: '#cc5500' },
+      2: { color: '#1426b3' }
+    },
+    chartArea: {
+      left: '5%', top: '10%', right: '5%', bottom: '15%'
+    },
+    tooltip: { trigger: 'focus' },
+  },
+  chartArea: { left: '10%' }
+});
+
+
+addMdToPage(`
+So yes, apperently we can see a kind  of connection: youngest students, which experience depression the most, are the ones with the 'worst' eating habits.\n
+Also, we can see that eating habits get better when getting older.
+_____________________________________________
+______________________________________________
+ `)
+
+
+//_________________________
 
 addMdToPage(`
 ## Is there a correlation between sleeping habits and depression?
@@ -115,7 +182,7 @@ tableFromData({
   columnNames: ['Degree', 'Sleep avg with depression', 'Sleep avg without depression']
 })
 
-addMdToPage(`without groping looks like:`)
+addMdToPage(`without grouping, it looks like:`)
 
 let sleeping_habit_tab_nogroup = await dbQuery(`select 
 round(avg(case when Depression = 1 then SleepDuration end), 1) as avg_with_depression,

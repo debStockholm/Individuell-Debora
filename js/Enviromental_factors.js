@@ -427,5 +427,5 @@ _**What does the graphs tell us:**_
 * **Age** and **City** doesn't seem to influence depression rates. The avg financial stress perceived throught the different ages and the different cities shows is quite linear, so there's no real correlation.\n 
 But do we have any causation?\n
 This is a tricky question: financial issues can contribuites to develop depression and they're a known triggering factor; but it's often overlooked that it can be also the other way around!
-Being depressed can cause to underperform at work/study and perhaphs causing financial issues. Or there ca be financial issues in the family. Hard to tell the reason behind the financial stress from this data.
+Being depressed can cause to underperform at work/study and perhaphs causing financial issues. Or there can be financial issues in the family. Hard to tell the reason behind the financial stress from this data.
 `)

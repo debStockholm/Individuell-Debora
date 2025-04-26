@@ -97,7 +97,7 @@ addMdToPage(`____________________________________________
   _______________________________________________________
   ________________________________________________________
   
-  **T-TEST males VS memales CGPA and Depression**`)
+  **T-TEST males VS females CGPA and Depression**`)
 
 let dataforTTEST = await csvLoad('student_depression_dataset.csv')
 

@@ -224,7 +224,7 @@ addMdToPage(`
   that Class 12 higher depression rates may depend on the youngest respondents making the biggest part of the data of this group.\n
 
   Another important consideration: Class 12 degree. In India, Class 12 can be compared to the last year of gymnasiet in Sweden.\n
-  Students attending Class12 should be 17-18 y.o. . In our dataset, there are **6080** students attending ('pursuing') Class 12, of which **4503** are older than 18 y.o. (which should the age of 'studenten').\n
+  Students attending Class12 should be 17-18 y.o. . In our dataset, there are **6068** students attending ('pursuing') Class 12, of which **4503** are older than 18 y.o. (which should the age of 'studenten').\n
   According to Kaggle, the Degrees mentioned are the ones students are pursuing. I do actually think there may been a mistake considering the ages and stress, which means the Degree names would be the titles already atteinted.
   But I worked accordingly to Kaggles information.
 
