@@ -221,7 +221,7 @@ addMdToPage(`
   Why is this important?\n
   We have seen that 'Class 12' students are the ones which the biggest percent of Depression among all the degree groups. We have also seen
   that Depression rates seem lowering the older you get. Being *20* the mode age of Class 12 students, and *20.1* the average age, means
-  that Class 12 higher depression rates may depend on the youngest respondents making the biggest part of the data of this group.\n
+  that Class 12 higher depressinoon rates may depend on the youngest respondents making the biggest part of the data of this group.\n
 
   Another important consideration: Class 12 degree. In India, Class 12 can be compared to the last year of gymnasiet in Sweden.\n
   Students attending Class12 should be 17-18 y.o. . In our dataset, there are **6068** students attending ('pursuing') Class 12, of which **4503** are older than 18 y.o. (which should the age of 'studenten').\n
