@@ -1,4 +1,3 @@
-
 """ 
 This looks like something where the program needs to run through the data and ´append´ only the relevant results 
 on a list. 
@@ -19,7 +18,7 @@ Logic:
 - I may also make a sum to count all the values collected (ID) in the list, but I guess being a small dataset they can be counted easily
 
 Could I write this -syntax- with my current skills? Absolutely not. 
-This is done in copilot and AI collab. Best I can do without is if/else"""
+This is done in copilot and AI collab. Best I can do without is if/else sorry"""
 
 #import data
 data_to_parse ="""
@@ -129,7 +128,7 @@ possible_limits = {
     "red": 12,
     "green": 13,
     "blue": 14
-}     #possible limits must be tested against this
+}     #possible limits must be tested against this"""
 
 #parse data
 
@@ -175,3 +174,41 @@ def parse_and_filter(data_to_parse, possible_limits):
 possible_IDs = parse_and_filter(data_to_parse, possible_limits)
 #print(possible_IDs)
 print("Sum:", sum(possible_IDs))   #2256
+
+
+
+#_____________________________________________________________________
+def min_cubes_power_sum(data_to_parse):
+    powers = []
+    for line in data_to_parse.strip().split('\n'):
+        if not line.startswith("Game "):
+            continue
+        try:
+            game_part, draws_part = line.split(":", 1)
+        except (ValueError, IndexError):
+            continue
+        draws = draws_part.split(';')
+        max_counts = {"red": 0, "green": 0, "blue": 0}
+        for draw in draws:
+            color_counts = {"red": 0, "green": 0, "blue": 0}
+            for part in draw.strip().split(','):
+                part = part.strip()
+                if not part:
+                    continue
+                tokens = part.split()
+                if len(tokens) == 2:
+                    num, color = tokens
+                    if color in color_counts:
+                        try:
+                            color_counts[color] = int(num)
+                        except ValueError:
+                            pass
+            for color in max_counts:
+                if color_counts[color] > max_counts[color]:
+                    max_counts[color] = color_counts[color]
+        power = max_counts["red"] * max_counts["green"] * max_counts["blue"]
+        powers.append(power)
+    return powers
+
+powers = min_cubes_power_sum(data_to_parse)
+print("Sum of powers:", sum(powers))   #74229
