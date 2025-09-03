@@ -1,4 +1,3 @@
-print("...")
 
 """ 
 This looks like something where the program needs to run through the data and ´append´ only the relevant results 
@@ -140,37 +139,37 @@ def parse_and_filter(data_to_parse, possible_limits):
     for line in data_to_parse.strip().split('\n'):       #-strip:removes whitespace, -split:divides the string into lines at newlines (I have never been able to use them well even if I know what they do)
         if not line.startswith("Game "):
             continue
-        try:
+        try:                                             #this split the ´Game´ part
             game_part, draws_part = line.split(":", 1)   # split the new line at ":"
             game_id = int(game_part.strip().split()[1])  # this convert (cast)the game ID from str to int
         except (ValueError, IndexError):                 # I may have used try and except once for testing, but long forgotten :(
             continue
-        draws = draws_part.split(';')                    # split string at ";"
+        draws = draws_part.split(';')                    # split string at ";", separate the draws in a line
         all_draws_possible = True                        #boolean tells all draws must be within limits
-        for draw in draws:
+        for draw in draws:                               #iterate over each draw
             color_counts = {"red": 0, "green": 0, "blue": 0}
-            # Split draw into color parts
-            for part in draw.strip().split(','):
+
+            for part in draw.strip().split(','):         #split each draw into color parts
                 part = part.strip()
                 if not part:
                     continue
-                tokens = part.split()
-                if len(tokens) == 2:
-                    num, color = tokens
+                tokens = part.split()                    #split each part into mini-lists
+                if len(tokens) == 2:                     #check if we have exactly 2 elements
+                    num, color = tokens                  #if the lists contain 2 elements then one is a number and the other is a color
                     if color in color_counts:
                         try:
                             color_counts[color] = int(num)
                         except ValueError:
                             pass
-            # Check limits
-            for color, count in color_counts.items():
-                if count > possible_limits[color]:
-                    all_draws_possible = False
+            
+            for color, count in color_counts.items():    #iterate over the color counts to see if any exceed the possible limits
+                if count > possible_limits[color]:       #check if the count exceeds the possible limits for each color
+                    all_draws_possible = False           #if at least one color exceeds the limit, the loop breaks
                     break
-            if not all_draws_possible:
+            if not all_draws_possible:                   #if at least one draw exceeds the limit, the loop breaks
                 break
         if all_draws_possible:
-            possible_IDs.append(game_id)
+            possible_IDs.append(game_id)                  #collect valid game IDs
     return possible_IDs
 
 possible_IDs = parse_and_filter(data_to_parse, possible_limits)
