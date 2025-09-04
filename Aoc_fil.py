@@ -1,4 +1,9 @@
 """ 
+OBS this is way over my skills!  
+Scriptiing comes from prompting Copilot - including AI.
+ Best I can do without is easier if/else.
+
+My logic before getting the code:
 This looks like something where the program needs to run through the data and ´append´ only the relevant results 
 on a list. 
 First thing, define limits, dvs max number for each colors, so possibility or not can be matched.
@@ -9,16 +14,14 @@ I did try but just took more time).
 Then create a for-loop to go through the data once and save only the possible ID in the declared list.
 By the end, count by hand or easily with sum().
 
-Logic:
+so:
 - Define the limit 
 - Tell the program how to read the data I have (;, .)...
 ...and handling the data I do not have (like colors missing)
 - Parse all data (once)
 - Append (collect) only the ID which are possible when all the condition on the same line are met
 - I may also make a sum to count all the values collected (ID) in the list, but I guess being a small dataset they can be counted easily
-
-Could I write this -syntax- with my current skills? Absolutely not. 
-This is done in copilot and AI collab. Best I can do without is if/else sorry"""
+"""
 
 #import data
 data_to_parse ="""
@@ -124,21 +127,23 @@ Game 99: 7 green, 2 red, 5 blue; 9 red, 17 green, 19 blue; 8 red, 12 blue, 1 gre
 Game 100: 4 blue, 3 green; 5 blue, 12 green; 16 green, 1 red, 1 blue; 2 blue, 1 green; 1 red, 3 blue, 18 green; 3 green, 1 red, 3 blue
 """   #this is basically just a long block text which need to be split into lines, to extract strings and ints
 
-possible_limits = {
+
+
+possible_limits = {     #possible limits must be tested against this
     "red": 12,
     "green": 13,
     "blue": 14
-}     #possible limits must be tested against this"""
+}    
+
 
 #parse data
-
 def parse_and_filter(data_to_parse, possible_limits):
-    possible_IDs = []  #collect only the ID which are within the possible limits
+    possible_IDs = []  #list collecting only the ID which are within the possible limits
 
     for line in data_to_parse.strip().split('\n'):       #-strip:removes whitespace, -split:divides the string into lines at newlines (I have never been able to use them well even if I know what they do)
         if not line.startswith("Game "):
             continue
-        try:                                             #this split the ´Game´ part
+        try:                                             #"try" split the ´Game´ part
             game_part, draws_part = line.split(":", 1)   # split the new line at ":"
             game_id = int(game_part.strip().split()[1])  # this convert (cast)the game ID from str to int
         except (ValueError, IndexError):                 # I may have used try and except once for testing, but long forgotten :(
@@ -154,10 +159,10 @@ def parse_and_filter(data_to_parse, possible_limits):
                     continue
                 tokens = part.split()                    #split each part into mini-lists
                 if len(tokens) == 2:                     #check if we have exactly 2 elements
-                    num, color = tokens                  #if the lists contain 2 elements then one is a number and the other is a color
+                    num, color = tokens                  #if the lists contain 2 elements then one is a number and the other is a color, assigned to variables
                     if color in color_counts:
                         try:
-                            color_counts[color] = int(num)
+                            color_counts[color] = int(num)  #convert the number from str to int and store in the color_counts dictionary
                         except ValueError:
                             pass
             
@@ -165,7 +170,7 @@ def parse_and_filter(data_to_parse, possible_limits):
                 if count > possible_limits[color]:       #check if the count exceeds the possible limits for each color
                     all_draws_possible = False           #if at least one color exceeds the limit, the loop breaks
                     break
-            if not all_draws_possible:                   #if at least one draw exceeds the limit, the loop breaks
+            if not all_draws_possible:                   #if boolean is False, the loop breaks
                 break
         if all_draws_possible:
             possible_IDs.append(game_id)                  #collect valid game IDs
@@ -173,13 +178,16 @@ def parse_and_filter(data_to_parse, possible_limits):
 
 possible_IDs = parse_and_filter(data_to_parse, possible_limits)
 #print(possible_IDs)
-print("Sum:", sum(possible_IDs))   #2256
+print("Sum of possible games:", sum(possible_IDs))   #2256
 
 
 
-#_____________________________________________________________________
-def min_cubes_power_sum(data_to_parse):
-    powers = []
+
+
+# PART TWO uses same data
+
+def min_cubes_power_sum(data_to_parse):  #parsing logic to create data structure is the same
+    game_powers = []
     for line in data_to_parse.strip().split('\n'):
         if not line.startswith("Game "):
             continue
@@ -203,12 +211,16 @@ def min_cubes_power_sum(data_to_parse):
                             color_counts[color] = int(num)
                         except ValueError:
                             pass
-            for color in max_counts:
+
+
+            for color in max_counts:   #this loops through each line and multiplicate each max value for each color
                 if color_counts[color] > max_counts[color]:
                     max_counts[color] = color_counts[color]
         power = max_counts["red"] * max_counts["green"] * max_counts["blue"]
-        powers.append(power)
-    return powers
+        game_powers.append(power)    #and save the results in the list
+    return game_powers
 
 powers = min_cubes_power_sum(data_to_parse)
-print("Sum of powers:", sum(powers))   #74229
+print("Sum of all powers:", sum(powers))   #74229
+
+
