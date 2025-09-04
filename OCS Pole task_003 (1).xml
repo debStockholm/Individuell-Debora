@@ -37,7 +37,7 @@
 		<TextPositionLuaExpression Name="OBJEKTINFO"><Formula>RC__TextAttributePosition(24,0)</Formula></TextPositionLuaExpression>
 
 		<CustomProperty DataType="Enumeration" Name="OcsPoleCrossSection" DisplayName="Masteprofil"
-			Description="The overhead catenary system (OCS) pole profile (omp) [HEB200..280 | HEM260 | H3..H6 | B2..B6 | 240x240 | Ø260].">
+			Description="The overhead catenary system (OCS) pole profile (omp) [HEB200..280 | HEM260 | H3..H6 | B2..B6 | 240x240 | Ø260].">  <!--or just update description?-->
 			<Values Variant="Bjelkemast">
 				<Value>HEB200</Value>
 				<Value>HEB220</Value>
@@ -60,8 +60,11 @@
 				<Value>B5</Value>
 				<Value>B6</Value>
 			</Values>
-			<!-- Indeed a bit confused about this.
-			 If it was me, I´d put it here and update the description (description which doesnt match the dimensions atm, but perhaps I am thinking too much about this?).
+			<!--
+			Legg til mastene med undertype type «C3», «C4» og «C5» i den vedlagte XML-filen. 
+			
+			Indeed a bit confused about this.
+			 I´d put it here and update the description -description which doesnt match the dimensions atm, but perhaps I am thinking too much about this?.
 			 In doubt, I created a new CustomProperty down here in case this mast needs specific properties (???)-->
 			<Values Variant="C-mast">     
 				<Value>C3</Value>
@@ -147,7 +150,7 @@
 				<Value>12500</Value>
 				<Value>13000</Value>
 			</Values>
-			<Values Variant="C-mast">      
+			<Values Variant="C-mast">      <!--C-mast heights-->
 				<Value>8000</Value>
 				<Value>8500</Value>
 				<Value>9000</Value>
@@ -174,19 +177,20 @@
 					elseif Variant == "B-mast" then
 						--Assume the 191x374 modern type:
 						return "NO-BN-3D-EH-MAS-GITTERMAST-" ..OcsPoleCrossSection .."-191x374xM36-"..OcsPoleHeight
-						<!-- added this to visualize 3D geometry name according to chosen type.-->
+						<!-- added this to visualize 3D geometry name according to chosen type.
+						Modifisér Lua-funksjonen som vil returnere 3D-geometriens filnavn på funksjon av hvilken mastetype / Variant /
+						sub-variant / mastehøyde som sluttbrukeren har satt inn i sin RC-modell.-->
 					elseif Variant == "C-mast" then
-						return <!--exempel this would return a specific drawing for subvar C4, 8m--> "NO-BN-3D-EH-MAS-CMAST-C4-191x374xM36-8000" ..OcsPoleCrossSection .."-191x374xM36-"..OcsPoleHeight
-						<!--I get what this function does, doesnt get how. Is this code partial, or I am totally missing?
-						There are different subvariants of B, H, C-mast so one variant -elif Variant == "C-mast" then - cannot be linked to just one drawing
-						(unless there is some limit), but all of them (I have those 12 files for C-mast).
-						Do I just return a general one...?-->
+						return <!--exempel this would return the dwg fil for subvar C4, 8000mm***--> "NO-BN-3D-EH-MAS-CMAST-C4-191x374xM36-8000" ..OcsPoleCrossSection .."-191x374xM36-"..OcsPoleHeight
 					else
 						return "Ukjent Variant ["..Variant.."]",_warning
 					end
 				end
 			</Formula>
 		</LuaFunction>
+      <!--*** I get what this function does but do not get how. 
+			I have different types of C-mast and geometry but the code I wrote just calls for a specific type among the 12s I have (should I have kept this general..?)
+			Question: If I had different subvariants of C-mast in the same project, how would I call the correct ones? I need different variables to not overwrite results for that***-->
 
 		<InsertPointObject Name="Bjelkemast" DisplayBlockName="NO-BN-2D-JBTEH_MAS-BJELKEMAST-{{SymbolMode}}" DefaultSnapMode="Alignment" SnapToAlignment="true" SnapDistance="4" SubGroup="Ordinære master">
 			<OwnAlignmentTargetSpace>spor</OwnAlignmentTargetSpace>
@@ -212,7 +216,8 @@
 			<SetValue Key="MileageIncreasesTowardsLeft" Value="{{alignmentRotation | minus:ucsRotation | cosisnegative}}"/>
 		</InsertPointObject>
 		
-		<!--Added this (create a new object for the new mast symbol)-->
+		<!--Added this (create a new object for the new mast symbol)
+		Den nye C-mastens 2D-symbol (et lite kvadrat med et kryss i) må altså bli omtalt i et nytt «InsertPointObject» element, som du skal foreslå.-->
 		<InsertPointObject Name="C-mast" DisplayBlockName="NO-BN-2D-JBTEH_MAS-CMAST-{{SymbolMode}}" DefaultSnapMode="Alignment" SnapToAlignment="true" SnapDistance="4" SubGroup="Ordinære master">
 			<OwnAlignmentTargetSpace>spor</OwnAlignmentTargetSpace>
 			<JigSymbolAppearance AddAngle="0" EnableDirectionSetting="false" RotateIfRightSideOfAlignment="true"/>
@@ -236,7 +241,7 @@
 				{% elsif Variant == 'B-mast' %}GITTERMAST-B
 				{% elsif Variant == 'H-mast' %}GITTERMAST-H
 				{% elsif Variant == 'C-mast' %}C-MAST  <!--added this to support the new mast symbol-->
-				{% else %}BAD_Variant_{{Variant}}
+				{% else %}BAD_Variant_{{Variant}}      <!-- Du skal legge inn den nye C-mastens 2D-symbol på riktig måte i «SymbolDefinition» elementet.-->
 				{% endif %}
 				{{SymbolMode}}
 			</BlockNameFormat>
