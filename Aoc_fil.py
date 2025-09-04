@@ -1,7 +1,8 @@
 """ 
 OBS this is way over my skills!  
-Scriptiing comes from prompting Copilot - including AI.
- Best I can do without is easier if/else.
+Scripting comes from prompting Copilot - including AI. 
+Not sure it can be considered a fair help, but at least I learnt something.
+(Best I can do without is easier if/else)
 
 My logic before getting the code:
 This looks like something where the program needs to run through the data and ´append´ only the relevant results 
