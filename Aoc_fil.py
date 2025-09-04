@@ -9,9 +9,7 @@ This looks like something where the program needs to run through the data and ´
 on a list. 
 First thing, define limits, dvs max number for each colors, so possibility or not can be matched.
 Create a list to store the ID values which are possible.
-Also program needs to understand how to read the data since is not a nice table format (if I had a paid version of
-some data AI tools I´d convert the data to a table to be analyzed by SQL, to skip scripting ´how to read this´ on python, 
-I did try but just took more time).
+Also program needs to understand how to read the data since is not a nice table format.
 Then create a for-loop to go through the data once and save only the possible ID in the declared list.
 By the end, count by hand or easily with sum().
 
@@ -144,7 +142,7 @@ def parse_and_filter(data_to_parse, possible_limits):
     for line in data_to_parse.strip().split('\n'):       #-strip:removes whitespace, -split:divides the string into lines at newlines (I have never been able to use them well even if I know what they do)
         if not line.startswith("Game "):
             continue
-        try:                                             #"try" split the ´Game´ part
+        try:                                             #"try" code splits the ´Game´ part
             game_part, draws_part = line.split(":", 1)   # split the new line at ":"
             game_id = int(game_part.strip().split()[1])  # this convert (cast)the game ID from str to int
         except (ValueError, IndexError):                 # I may have used try and except once for testing, but long forgotten :(
