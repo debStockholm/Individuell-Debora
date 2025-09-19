@@ -1,0 +1,259 @@
+<!--========================================================================================================
+
+    NO-BN-OcsPoles.xml
+	
+	Include in DNA file using XPPq XML preprocessor directive <xpp:expand href="fileName.xml"/>.
+
+	Copyright (c) 2015-2026 Railcomplete AS, Norway, NO916118503
+	
+	2025-09-01_001 CLFEY: Stripped-down version for use in job applicant's challenge.
+	2025-09-02_002 SVNOE: Further stripped-down version for use in job applicant's challenge.
+	
+=========================================================================================================-->
+<xpp:bloc>
+
+
+<!--========================================================================================================
+	HIGH VOLTAGE
+	CATENARY SUPPORT POLE
+=========================================================================================================-->
+	<ObjectType DataType="tOrientedElement" Class="RailwayPlacedObject" LuaName="rctype_OcsPole" Name="JBTEH_MAS KL-mast" 
+				Layer="JBTEH_MAS" Color="ByLayer"
+				Group="Kontaktledning/Master">
+
+		<RelationSpace>kl-mast</RelationSpace>
+		<AttachmentCategory Name="kl-mast"/>
+		
+		<Variants DefaultValue="Bjelkemast">
+			<Variant Name="Bjelkemast" />
+			<Variant Name="Bjelkemast, forsterket" />
+			<Variant Name="H-mast" />
+			<Variant Name="B-mast" />
+			<Variant Name="C-mast" />              <!-- C-mast typ -->
+		</Variants>
+
+		<TextPositionLuaExpression Name="OBJEKTNAVN"><Formula>RC__TextAttributePosition(4,0)</Formula></TextPositionLuaExpression>
+		<TextPositionLuaExpression Name="OBJEKTID"><Formula>RC__TextAttributePosition(22,0)</Formula></TextPositionLuaExpression>
+		<TextPositionLuaExpression Name="OBJEKTINFO"><Formula>RC__TextAttributePosition(24,0)</Formula></TextPositionLuaExpression>
+
+		<CustomProperty DataType="Enumeration" Name="OcsPoleCrossSection" DisplayName="Masteprofil"
+			Description="The overhead catenary system (OCS) pole profile (omp) [HEB200..280 | HEM260 | H3..H6 | B2..B6 | 240x240 | Ø260].">  <!--or just update description?-->
+			<Values Variant="Bjelkemast">
+				<Value>HEB200</Value>
+				<Value>HEB220</Value>
+				<Value>HEB240</Value>
+				<Value>HEB260</Value>
+				<Value>HEB280</Value>
+			</Values>
+			<Values Variant="Bjelkemast, forsterket">
+				<Value>HEM260</Value>
+			</Values>
+			<Values Variant="H-mast">
+				<Value>H3</Value>
+				<Value>H5</Value>
+				<Value>H6</Value>
+			</Values>
+			<Values Variant="B-mast">
+				<Value>B2</Value>
+				<Value>B3</Value>
+				<Value>B4</Value>
+				<Value>B5</Value>
+				<Value>B6</Value>
+			</Values>
+			<!--
+			Legg til mastene med undertype type «C3», «C4» og «C5» i den vedlagte XML-filen. 
+			
+			Indeed a bit confused about this.
+			 I´d put it here and update the description -description which doesnt match the dimensions atm, but perhaps I am thinking too much about this?.
+			 In doubt, I created a new CustomProperty down here in case this mast needs specific properties (???)-->
+			<Values Variant="C-mast">     
+				<Value>C3</Value>
+				<Value>C4</Value>
+				<Value>C5</Value>
+			</Values>
+		</CustomProperty>
+
+		<!-- this, but doesn´t look quite right, I would not need a new whole custom property for just this mast...?
+
+		<CustomProperty DataType="Enumeration" Name="NEW_OcsPoleCrossSection" DisplayName="Masteprofil_C-master"
+			Description="The overhead catenary system (OCS) pole profile (omp) for C-mast [C3..C5| 191x374 | Ø360]." UPDATED DESCRIPTION>
+			<Values Variant="C-mast">
+				<Value>C3</Value>		
+				<Value>C4</Value>
+				<Value>C5</Value>
+			</Values>
+		</CustomProperty>   -->
+
+		<CustomProperty DataType="Enumeration" Name="OcsPoleHeight" DisplayName="Mastehøyde"
+			Description="The overhead catenary system (OCS) pole height [mm]. The total pole length is the sum of its height and its depth.">
+			<Values Variant="Bjelkemast">
+				<Value>6000</Value>
+				<Value>6500</Value>
+				<Value>7000</Value>
+				<Value>7500</Value>
+				<Value>8000</Value>
+				<Value>8500</Value>
+				<Value>9000</Value>
+				<Value>9500</Value>
+				<Value>10000</Value>
+				<Value>10500</Value>
+				<Value>11000</Value>
+				<Value>11500</Value>
+				<Value>12000</Value>
+				<Value>12500</Value>
+				<Value>13000</Value>
+			</Values>
+			<Values Variant="Bjelkemast, forsterket">
+				<Value>8000</Value>
+				<Value>8500</Value>
+				<Value>9000</Value>
+				<Value>9500</Value>
+				<Value>10000</Value>
+				<Value>10500</Value>
+				<Value>11000</Value>
+				<Value>11500</Value>
+				<Value>12000</Value>
+				<Value>12500</Value>
+				<Value>13000</Value>
+			</Values>
+			<Values Variant="H-mast">
+				<Value>6000</Value>
+				<Value>6500</Value>
+				<Value>7000</Value>
+				<Value>7500</Value>
+				<Value>8000</Value>
+				<Value>8500</Value>
+				<Value>9000</Value>
+				<Value>9500</Value>
+				<Value>10000</Value>
+				<Value>10500</Value>
+				<Value>11000</Value>
+				<Value>11500</Value>
+				<Value>12000</Value>
+				<Value>12500</Value>
+				<Value>13000</Value>
+			</Values>
+			<Values Variant="B-mast">
+				<Value>6000</Value>
+				<Value>6500</Value>
+				<Value>7000</Value>
+				<Value>7500</Value>
+				<Value>8000</Value>
+				<Value>8500</Value>
+				<Value>9000</Value>
+				<Value>9500</Value>
+				<Value>10000</Value>
+				<Value>10500</Value>
+				<Value>11000</Value>
+				<Value>11500</Value>
+				<Value>12000</Value>
+				<Value>12500</Value>
+				<Value>13000</Value>
+			</Values>
+			<Values Variant="C-mast">      <!--C-mast heights-->
+				<Value>8000</Value>
+				<Value>8500</Value>
+				<Value>9000</Value>
+				<Value>9500</Value>
+			</Values>
+		</CustomProperty>
+		
+
+
+		<LuaExpression Name="Geometry3D_0.Name"><Formula>_JBTEH_MAS_ocsPole_Geometry3DName()</Formula></LuaExpression>
+		<LuaFunction Name="_JBTEH_MAS_ocsPole_Geometry3DName()" 
+			ReturnType="String"
+			Description="Obtains the 3D geometry's 'Name' for this KL pole.">
+			<Signature>Double _JBTEH_MAS_ocsPole_Geometry3DName()</Signature>
+			<Formula>
+				function _JBTEH_MAS_ocsPole_Geometry3DName()
+					if Variant == "Bjelkemast" then
+						return "NO-BN-3D-EH-MAS-BJELKEMAST-" ..OcsPoleCrossSection .."-191x374xM36-"..OcsPoleHeight
+					elseif Variant == "Bjelkemast, forsterket" then
+						return "NO-BN-3D-EH-MAS-BJELKEMAST-" ..OcsPoleCrossSection .."-191x374xM36-"..OcsPoleHeight
+					elseif Variant == "H-mast" then
+						--Assume the 191x374 modern type:
+						return "NO-BN-3D-EH-MAS-GITTERMAST-" ..OcsPoleCrossSection .."-191x374xM36-"..OcsPoleHeight
+					elseif Variant == "B-mast" then
+						--Assume the 191x374 modern type:
+						return "NO-BN-3D-EH-MAS-GITTERMAST-" ..OcsPoleCrossSection .."-191x374xM36-"..OcsPoleHeight
+						<!-- added this to visualize 3D geometry name according to chosen type.
+						Modifisér Lua-funksjonen som vil returnere 3D-geometriens filnavn på funksjon av hvilken mastetype / Variant /
+						sub-variant / mastehøyde som sluttbrukeren har satt inn i sin RC-modell.-->
+					elseif Variant == "C-mast" then
+						return <!--exempel this would return the dwg fil for subvar C4, 8000mm***--> "NO-BN-3D-EH-MAS-CMAST-C4-191x374xM36-8000" ..OcsPoleCrossSection .."-191x374xM36-"..OcsPoleHeight
+					else
+						return "Ukjent Variant ["..Variant.."]",_warning
+					end
+				end
+			</Formula>
+		</LuaFunction>
+      <!--*** I get what this function does but do not get how. 
+			I have different types of C-mast and geometry but the code I wrote just calls for a specific type among the 12s I have (should I have kept this general..?)
+			Question: If I had different subvariants of C-mast in the same project, how would I call the correct ones? I need different variables to not overwrite results for that***-->
+
+		<InsertPointObject Name="Bjelkemast" DisplayBlockName="NO-BN-2D-JBTEH_MAS-BJELKEMAST-{{SymbolMode}}" DefaultSnapMode="Alignment" SnapToAlignment="true" SnapDistance="4" SubGroup="Ordinære master">
+			<OwnAlignmentTargetSpace>spor</OwnAlignmentTargetSpace>
+			<JigSymbolAppearance AddAngle="0" EnableDirectionSetting="false" RotateIfRightSideOfAlignment="true"/>
+			<SetValue Key="MileageIncreasesTowardsLeft" Value="{{alignmentRotation | minus:ucsRotation | cosisnegative}}"/>
+		</InsertPointObject>
+		
+		<InsertPointObject Name="Bjelkemast, forsterket" DisplayBlockName="NO-BN-2D-JBTEH_MAS-BJELKEMAST-FORSTERKET-{{SymbolMode}}" DefaultSnapMode="Alignment" SnapToAlignment="true" SnapDistance="4" SubGroup="Ordinære master">
+			<OwnAlignmentTargetSpace>spor</OwnAlignmentTargetSpace>
+			<JigSymbolAppearance AddAngle="0" EnableDirectionSetting="false" RotateIfRightSideOfAlignment="true"/>
+			<SetValue Key="MileageIncreasesTowardsLeft" Value="{{alignmentRotation | minus:ucsRotation | cosisnegative}}"/>
+		</InsertPointObject>
+		
+		<InsertPointObject Name="H-mast" DisplayBlockName="NO-BN-2D-JBTEH_MAS-GITTERMAST-H-{{SymbolMode}}" DefaultSnapMode="Alignment" SnapToAlignment="true" SnapDistance="4" SubGroup="Ordinære master">
+			<OwnAlignmentTargetSpace>spor</OwnAlignmentTargetSpace>
+			<JigSymbolAppearance AddAngle="0" EnableDirectionSetting="false" RotateIfRightSideOfAlignment="true"/>
+			<SetValue Key="MileageIncreasesTowardsLeft" Value="{{alignmentRotation | minus:ucsRotation | cosisnegative}}"/>
+		</InsertPointObject>
+		
+		<InsertPointObject Name="B-mast" DisplayBlockName="NO-BN-2D-JBTEH_MAS-GITTERMAST-B-{{SymbolMode}}" DefaultSnapMode="Alignment" SnapToAlignment="true" SnapDistance="4" SubGroup="Ordinære master">
+			<OwnAlignmentTargetSpace>spor</OwnAlignmentTargetSpace>
+			<JigSymbolAppearance AddAngle="0" EnableDirectionSetting="false" RotateIfRightSideOfAlignment="true"/>
+			<SetValue Key="MileageIncreasesTowardsLeft" Value="{{alignmentRotation | minus:ucsRotation | cosisnegative}}"/>
+		</InsertPointObject>
+		
+		<!--Added this (create a new object for the new mast symbol)
+		Den nye C-mastens 2D-symbol (et lite kvadrat med et kryss i) må altså bli omtalt i et nytt «InsertPointObject» element, som du skal foreslå.-->
+		<InsertPointObject Name="C-mast" DisplayBlockName="NO-BN-2D-JBTEH_MAS-CMAST-{{SymbolMode}}" DefaultSnapMode="Alignment" SnapToAlignment="true" SnapDistance="4" SubGroup="Ordinære master">
+			<OwnAlignmentTargetSpace>spor</OwnAlignmentTargetSpace>
+			<JigSymbolAppearance AddAngle="0" EnableDirectionSetting="false" RotateIfRightSideOfAlignment="true"/>
+			<SetValue Key="MileageIncreasesTowardsLeft" Value="{{alignmentRotation | minus:ucsRotation | cosisnegative}}"/>
+		</InsertPointObject>
+
+
+		<SymbolDefinition AllowSymbolMove="true">
+			<Rotation Add180DegreesIfDirIsDown="false" AddAngle="{% if dir == 'up' %}{{270.0|plus:AngularOffset}}
+														{% elsif dir == 'down' %}{{90.0|plus:AngularOffset}}
+														{% elsif dir == 'both' and RightSided %}{{180.0|plus:AngularOffset}}
+														{% elsif dir == 'both' and LeftSided %}{{0.0|plus:AngularOffset}}
+														{% elsif dir == 'none' and RightSided %}{{0.0|plus:AngularOffset}}
+														{% elsif dir == 'none' and LeftSided %}{{180.0|plus:AngularOffset}}
+														{% else %}45.0
+														{% endif %}"/>	
+			<BlockNameFormat JoinBy="-">
+				NO-BN-2D-JBTEH_MAS
+				{% if    Variant == 'Bjelkemast' %}BJELKEMAST
+				{% elsif Variant == 'Bjelkemast, forsterket' %}BJELKEMAST-FORSTERKET
+				{% elsif Variant == 'B-mast' %}GITTERMAST-B
+				{% elsif Variant == 'H-mast' %}GITTERMAST-H
+				{% elsif Variant == 'C-mast' %}C-MAST  <!--added this to support the new mast symbol-->
+				{% else %}BAD_Variant_{{Variant}}      <!-- Du skal legge inn den nye C-mastens 2D-symbol på riktig måte i «SymbolDefinition» elementet.-->
+				{% endif %}
+				{{SymbolMode}}
+			</BlockNameFormat>
+		</SymbolDefinition>
+		
+		<SymbolDefinition DefaultBlockName="NO-BN-2D-JBTRC_INNSETTINGSPUNKT-Schematic" DoNotIncludeInSymbolFrame="true"/>
+
+	</ObjectType>
+
+
+
+<!--========================================================================================================
+    End of file 
+=========================================================================================================-->
+</xpp:bloc>
