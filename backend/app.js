@@ -10,8 +10,12 @@ const port = 3005;
 // Create a web server
 const app = express();
 
+console.log("Starting server...");
+console.log(`Server running at http://localhost:${port}`);
+
 // Path to this folder
 const dirname = import.meta.dirname;
+
 
 // respond when people are trying to libs by import
 // (now they are all bundled - so they should stop, but we're kind)

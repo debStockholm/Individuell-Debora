@@ -1,6 +1,6 @@
 addMdToPage(`
 
-# Depression: an overview
+# Depression: overview
 
 **Depression**, or major depressive disorder (MDD), is a common yet serious mental health condition characterized by persistent feelings of sadness and a loss of interest in activities once enjoyed.\n 
 It affects how one feels, thinks, and behaves, leading to various emotional and physical problems. Without treatment, depression can worsen and interfere with daily functioning. ​
